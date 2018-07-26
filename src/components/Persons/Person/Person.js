@@ -1,14 +1,32 @@
-import React from 'react';
+import React, { Component } from 'react';
 import classes from './Person.css';
+import withClass from '../../../hoc/withClass';
+import Aux from '../../../hoc/Auxe';
 
-const person = ( props ) => {
-  return (
-    <div className={classes.Person}>
-      <p onClick={ props.click }> I'm { props.name } and I am { props.age }</p>
-      <p> { props.children}</p>
-      <input type="text" onChange={ props.changed } value={ props.name } />
-    </div>
-  )
-};
+class Person extends Component {
+  constructor( props ) {
+    super( props );
+    console.log('[Person.js] inside Constructor', props);
+  }
 
-export default person;
+  componentWillMount() {
+    console.log('Person.js inside component will mount');
+  }
+
+  componentDidMount() {
+    console.log('Person.js inside component did mount');
+  }
+
+  render() {
+    console.log('Person.js inside render');
+
+    return (
+      <Aux>
+        <p onClick={ this.props.click }> I'm { this.props.name } and I am { this.props.age }</p>
+        <p> { this.props.children}</p>
+        <input type="text" onChange={ this.props.changed } value={this.props.name } />
+      </Aux>
+  )};
+}
+
+export default withClass(Person, classes.Person);
